@@ -50,7 +50,11 @@ int main(void){
 	    else if (menu == 5){
 		    if (count==0) printf("데이터가 없습니다!\n");
 		    else saveData(slist,curcount);
+	    
 	    }
+	else if(menu ==6){
+		loadData(slist);
+	}
 	}
 
 	printf("\n종료됨!\n");

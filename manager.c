@@ -8,7 +8,9 @@ int selectMenu(){
     printf("3. 수정\n");
     printf("4. 삭제\n");
     printf("5. 저장\n");
+    printf("6. 불러오기\n");
     printf("0. 종료\n\n");
+   
     printf("=> 원하는 메뉴는? ");
     scanf("%d", &menu);
     return menu;
@@ -52,17 +54,20 @@ void saveData(Product *p, int count){
 	
 	
 
-
-//파일에서 데이터 불러오는 함수
 int loadData(Product *p){
-	int count=0;
-	FILE*fp;
-
-	//파일 내용을 읽어와서 배열에 값 추가하기
-
-
-
-
-	printf("=> 로딩 성공!\n");
-	return count;
+    int count=0;
+    FILE* fp = fopen("product.txt", "rt"); // 파일 열기
+    if(fp == NULL){ // 파일 열기에 실패한 경우
+        printf("파일 열기 실패!\n");\
+        return 0;
+    }
+    
+    while(!feof(fp)){ // 파일 끝까지 읽어오기
+        fscanf(fp, "%s %d %d\n", p[count].name, &p[count].weight, &p[count].price); // 파일에서 제품 정보 읽어오기
+        count++;
+    }
+    
+    fclose(fp); // 파일 닫기
+    printf("=> 로딩 성공!\n");
+    return count-1;
 }
